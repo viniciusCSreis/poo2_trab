@@ -1,5 +1,7 @@
 package br.ufu.poo2;
 
+import br.ufu.poo2.factory.MainSpacecraft;
+import br.ufu.poo2.model.Spacecraft;
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
@@ -12,25 +14,30 @@ public class SimpleGame extends ApplicationAdapter {
 
 
     SpriteBatch spriteBatch;
+    Spacecraft spacecraft;
     Rectangle rectangle1;
     Rectangle rectangle2;
-    Texture texture;
+    Texture texture1;
+    Texture texture2;
     float red;
 
     @Override
     public void create () {
+
+        spacecraft= MainSpacecraft.createSpacecraft();
         spriteBatch = new SpriteBatch();
         rectangle1 = new Rectangle();
-        texture = new Texture("badlogic.jpg");
-        rectangle1.height = texture.getHeight();
-        rectangle1.width = texture.getWidth();
+        texture1 = new Texture(spacecraft.getImgName());
+
+        rectangle1.height = texture1.getHeight();
+        rectangle1.width = texture1.getWidth();
         rectangle1.x = 0;
         rectangle1.y = 0;
 
         rectangle2 = new Rectangle();
-        texture = new Texture("badlogic.jpg");
-        rectangle2.height = texture.getHeight();
-        rectangle2.width = texture.getWidth();
+        texture2 = new Texture("badlogic.jpg");
+        rectangle2.height = texture2.getHeight();
+        rectangle2.width = texture2.getWidth();
         rectangle2.x = 200;
         rectangle2.y = 300;
 
@@ -45,8 +52,8 @@ public class SimpleGame extends ApplicationAdapter {
 
         spriteBatch.begin();
 
-        spriteBatch.draw(texture, rectangle1.x, rectangle1.y);
-        spriteBatch.draw(texture, rectangle2.x, rectangle2.y);
+        spriteBatch.draw(texture1, rectangle1.x, rectangle1.y);
+        spriteBatch.draw(texture2, rectangle2.x, rectangle2.y);
         spriteBatch.end();
 
         if (Gdx.input.isKeyPressed(Input.Keys.A)){
