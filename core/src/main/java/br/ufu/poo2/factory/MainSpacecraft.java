@@ -18,7 +18,7 @@ public class MainSpacecraft {
     }
 
     public static Spacecraft createSpacecraft(){
-        return new Spacecraft("1spaceship.png",100);
+        return new Spacecraft("1spaceship200px.png",100);
     }
 
 

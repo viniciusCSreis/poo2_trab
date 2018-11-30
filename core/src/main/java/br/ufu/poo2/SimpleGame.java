@@ -7,6 +7,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Rectangle;
 
@@ -17,8 +18,8 @@ public class SimpleGame extends ApplicationAdapter {
     Spacecraft spacecraft;
     Rectangle rectangle1;
     Rectangle rectangle2;
-    Texture texture1;
-    Texture texture2;
+    Sprite sprite1;
+    Sprite sprite2;
     float red;
 
     @Override
@@ -27,17 +28,20 @@ public class SimpleGame extends ApplicationAdapter {
         spacecraft= MainSpacecraft.createSpacecraft();
         spriteBatch = new SpriteBatch();
         rectangle1 = new Rectangle();
-        texture1 = new Texture(spacecraft.getImgName());
+        Texture texture1 = new Texture(spacecraft.getImgName());
+        sprite1= new Sprite(texture1);
+        sprite1.setPosition(0, 0);
 
-        rectangle1.height = texture1.getHeight();
-        rectangle1.width = texture1.getWidth();
+        rectangle1.height = sprite1.getHeight();
+        rectangle1.width = sprite1.getWidth();
         rectangle1.x = 0;
         rectangle1.y = 0;
 
         rectangle2 = new Rectangle();
-        texture2 = new Texture("badlogic.jpg");
-        rectangle2.height = texture2.getHeight();
-        rectangle2.width = texture2.getWidth();
+        Texture texture2 = new Texture("badlogic.jpg");
+        sprite2 = new Sprite(texture2);
+        rectangle2.height = sprite2.getHeight();
+        rectangle2.width = sprite2.getWidth();
         rectangle2.x = 200;
         rectangle2.y = 300;
 
@@ -52,8 +56,8 @@ public class SimpleGame extends ApplicationAdapter {
 
         spriteBatch.begin();
 
-        spriteBatch.draw(texture1, rectangle1.x, rectangle1.y);
-        spriteBatch.draw(texture2, rectangle2.x, rectangle2.y);
+        spriteBatch.draw(sprite1, rectangle1.x, rectangle1.y);
+        spriteBatch.draw(sprite2, rectangle2.x, rectangle2.y);
         spriteBatch.end();
 
         if (Gdx.input.isKeyPressed(Input.Keys.A)){
