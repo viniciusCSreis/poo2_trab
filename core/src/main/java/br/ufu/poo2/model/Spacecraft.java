@@ -1,22 +1,26 @@
 package br.ufu.poo2.model;
 
-public class Spacecraft {
+import br.ufu.poo2.factory.ShotFactory;
+import br.ufu.poo2.observer.IObserver;
+import br.ufu.poo2.observer.ISubject;
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Sprite;
 
-    String imgName;
-    int life;
+import java.util.ArrayList;
 
-    public Spacecraft(String imgName, int life) {
-        this.imgName = imgName;
+public class Spacecraft extends Sprite {
+
+    private int life;
+
+    private int speed;
+
+    public Spacecraft(Texture texture, int life,int speed) {
+        super(texture);
         this.life = life;
+        this.speed= speed;
     }
 
-    public String getImgName() {
-        return imgName;
-    }
 
-    public void setImgName(String imgName) {
-        this.imgName = imgName;
-    }
 
     public int getLife() {
         return life;
@@ -25,4 +29,15 @@ public class Spacecraft {
     public void setLife(int life) {
         this.life = life;
     }
+
+    public int getSpeed() {
+        return speed;
+    }
+
+    public void setSpeed(int speed) {
+        this.speed = speed;
+    }
+
+
+
 }
