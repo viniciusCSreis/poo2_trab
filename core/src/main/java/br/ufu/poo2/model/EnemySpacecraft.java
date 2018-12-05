@@ -5,12 +5,25 @@ import br.ufu.poo2.observer.ISubject;
 import com.badlogic.gdx.graphics.Texture;
 
 public class EnemySpacecraft extends Spacecraft implements IObserver {
-    public EnemySpacecraft(Texture texture, int life, int speed) {
+
+    private int damage;
+
+    public EnemySpacecraft(Texture texture, int life, int speed, int damage) {
         super(texture, life, speed);
+        this.damage = damage;
     }
 
     @Override
-    public void update(ISubject p) {
+    public boolean update(ISubject p) {
+        MainSpacecraft mainSpacecraft = (MainSpacecraft) p;
         this.setY(this.getY()-this.getSpeed());
+        if( this.getY() <= 0 ||  this.getBoundingRectangle().overlaps( mainSpacecraft.getBoundingRectangle() ) )
+        {
+            mainSpacecraft.setLife(mainSpacecraft.getLife()-damage);
+            return false;
+        }
+
+        return true;
+
     }
 }

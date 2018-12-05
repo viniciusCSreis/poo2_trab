@@ -35,7 +35,7 @@ public class Shot extends Sprite implements IObserver {
     }
 
     @Override
-    public void update(ISubject p) {
+    public boolean update(ISubject p) {
         MainSpacecraft mainSpacecraft = (MainSpacecraft) p;
         Iterator<EnemySpacecraft> enemySpacecrafts = mainSpacecraft.getEnemySpacecrafts().iterator();
         while (enemySpacecrafts.hasNext()) {
@@ -44,11 +44,12 @@ public class Shot extends Sprite implements IObserver {
                 enemySpacecraft.setLife(enemySpacecraft.getLife()-this.damage);
                 if(enemySpacecraft.getLife()<=0){
                     enemySpacecrafts.remove();
-                    mainSpacecraft.setKillEnemies();
+                    mainSpacecraft.addKillEnemies();
                 }
-                break;
+                return false;
             }
         }
         this.setY(this.getY()+this.speed);
+        return true;
     }
 }

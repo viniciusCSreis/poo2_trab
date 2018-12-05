@@ -1,12 +1,7 @@
 package br.ufu.poo2.model;
 
-import br.ufu.poo2.factory.ShotFactory;
-import br.ufu.poo2.observer.IObserver;
-import br.ufu.poo2.observer.ISubject;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
-
-import java.util.ArrayList;
 
 public class Spacecraft extends Sprite {
 

@@ -36,7 +36,6 @@ public class MenuScreen implements Screen {
         TextButton newGame = new TextButton("Novo Jogo", skin);
         table.add(newGame).fillX().uniformX();
         table.row().pad(10, 0, 10, 0);
-
         newGame.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {

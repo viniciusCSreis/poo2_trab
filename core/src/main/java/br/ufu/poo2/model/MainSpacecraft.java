@@ -5,20 +5,26 @@ import br.ufu.poo2.factory.ShotFactory;
 import br.ufu.poo2.observer.IObserver;
 import br.ufu.poo2.observer.ISubject;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.utils.TimeUtils;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 
 public class MainSpacecraft extends Spacecraft implements ISubject {
 
     private ArrayList<EnemySpacecraft> enemySpacecrafts;
     private ArrayList<Shot> shots;
     private int killEnemies;
+    private long lastShotTime;
+    private double shotSpeed;
 
     public MainSpacecraft(Texture texture, int life, int speed) {
         super(texture, life, speed);
         enemySpacecrafts=new ArrayList<>();
         this.shots = new ArrayList<>();
         this.killEnemies = 0;
+        this.lastShotTime = 0;
+        this.shotSpeed = 0.2;
 
     }
 
@@ -36,8 +42,13 @@ public class MainSpacecraft extends Spacecraft implements ISubject {
     }
 
     public void createShot(){
-        Shot shot = ShotFactory.create(this);
-        registerObserver(shot);
+        if(TimeUtils.nanoTime() - lastShotTime > 1000000000 * shotSpeed)
+        {
+            Shot shot = ShotFactory.create(this);
+            registerObserver(shot);
+            lastShotTime = TimeUtils.nanoTime();
+        }
+
     }
 
     @Override
@@ -50,20 +61,27 @@ public class MainSpacecraft extends Spacecraft implements ISubject {
         shots.remove(observer);
     }
 
-    @Override
-    public void notifyObservers() {
-        for (IObserver observer: shots ) {
-
-            observer.update(this);
-
-        }
-    }
-
     public int getKillEnemies() {
         return killEnemies;
     }
 
-    public void setKillEnemies() {
+    @Override
+    public void notifyObservers() {
+        Iterator<Shot> shotIterator = shots.iterator();
+        while (shotIterator.hasNext()){
+            Shot shot = shotIterator.next();
+            if(!shot.update(this)){
+                shotIterator.remove();
+            }
+
+        }
+    }
+
+    public void setEnemySpacecrafts(ArrayList<EnemySpacecraft> enemySpacecrafts) {
+        this.enemySpacecrafts = enemySpacecrafts;
+    }
+
+    public void addKillEnemies() {
         this.killEnemies++;
     }
 }

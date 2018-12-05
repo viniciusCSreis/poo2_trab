@@ -22,9 +22,9 @@ public class EnemySpacecraftFactory {
     public static EnemySpacecraft create(){
 
         Texture texture =  new Texture("2spaceship100px.png");
-        float x = (float)(Math.random()*1366 * 0.75);
+        float x = (float)(Math.random()*1366 * 0.75) + 200;
 
-        EnemySpacecraft enemySpacecraft = new EnemySpacecraft(texture,100,3);
+        EnemySpacecraft enemySpacecraft = new EnemySpacecraft(texture,100,3,10);
         enemySpacecraft.setX(x);
         enemySpacecraft.setY(766);
         return enemySpacecraft;
