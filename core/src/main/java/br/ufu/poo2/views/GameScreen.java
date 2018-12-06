@@ -16,12 +16,18 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.utils.TimeUtils;
 import command.Control;
+import com.badlogic.gdx.audio.Sound;
+import com.badlogic.gdx.audio.Music;
+
+
 
 import java.awt.*;
 import java.util.Iterator;
 
 public class GameScreen implements Screen {
 
+
+    
     private SpriteBatch spriteBatch;
     private MainSpacecraft mainSpaceCraft;
     private Control control;
@@ -40,6 +46,13 @@ public class GameScreen implements Screen {
         font=new BitmapFont();
         camera = new OrthographicCamera();
         camera.setToOrtho(false, getWidth(), getHeight());
+       
+        music = Gdx.audio.newMusic(Gdx.files.internal("musicafundo.mp3"));
+        music.setVolume(0.1f);
+        music.setLooping(true);
+        music.play();
+       
+        
     }
 
 
@@ -47,12 +60,16 @@ public class GameScreen implements Screen {
     public void show() {
 
     }
+    
+    private Music music;
 
+    
     @Override
     public void render(float delta) {
         Gdx.gl.glClearColor(0,0,0,1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-
+        
+        
         camera.update();
 
 
@@ -149,7 +166,9 @@ public class GameScreen implements Screen {
 
     @Override
     public void dispose() {
-
+        
+        music.dispose();
+        
     }
 
     public static int getWidth(){
