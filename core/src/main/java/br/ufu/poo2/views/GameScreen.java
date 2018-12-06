@@ -2,7 +2,7 @@ package br.ufu.poo2.views;
 
 import br.ufu.poo2.Poo2Game;
 import br.ufu.poo2.factory.ControlFactory;
-import br.ufu.poo2.factory.factoryMethod.spacecraftFactory.MainSpacecraftFactory;
+import br.ufu.poo2.factory.MainSpacecraftFactory;
 import br.ufu.poo2.model.EnemySpacecraft;
 import br.ufu.poo2.model.MainSpacecraft;
 import br.ufu.poo2.model.shot.Shot;

@@ -1,6 +1,6 @@
 package br.ufu.poo2.model;
 
-import br.ufu.poo2.factory.factoryMethod.spacecraftFactory.EnemySpacecraftFactory;
+import br.ufu.poo2.factory.EnemySpacecraftFactory;
 import br.ufu.poo2.factory.factoryMethod.shotFactory.ShotFactory;
 import br.ufu.poo2.factory.factoryMethod.shotFactory.ShotSimpleFactory;
 import br.ufu.poo2.factory.factoryMethod.shotFactory.ShotStrongFactory;
@@ -83,6 +83,10 @@ public class MainSpacecraft extends Spacecraft implements ISubject {
             }
 
         }
+    }
+
+    public void setShotSpeed(double shotSpeed) {
+        this.shotSpeed = shotSpeed;
     }
 
     public void setEnemySpacecrafts(ArrayList<EnemySpacecraft> enemySpacecrafts) {
