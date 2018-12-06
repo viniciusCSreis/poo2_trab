@@ -26,7 +26,7 @@ public class MainSpacecraftFactory{
 
         if (spaceCraft == 2) {
             texture = new Texture("3spaceship100px.png");
-            mainSpacecraft = new MainSpacecraft(texture,50,20);
+            mainSpacecraft = new MainSpacecraft(texture,50,15);
             mainSpacecraft.setShotSpeed(0.1);
         } else if (spaceCraft == 3) {
             texture = new Texture("4spaceship100px.png");

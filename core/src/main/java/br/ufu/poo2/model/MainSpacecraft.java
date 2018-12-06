@@ -1,6 +1,7 @@
 package br.ufu.poo2.model;
 
 import br.ufu.poo2.factory.EnemySpacecraftFactory;
+import br.ufu.poo2.factory.StarFactory;
 import br.ufu.poo2.factory.factoryMethod.shotFactory.ShotFactory;
 import br.ufu.poo2.factory.factoryMethod.shotFactory.ShotSimpleFactory;
 import br.ufu.poo2.factory.factoryMethod.shotFactory.ShotStrongFactory;
@@ -17,6 +18,7 @@ public class MainSpacecraft extends Spacecraft implements ISubject {
 
     private ArrayList<EnemySpacecraft> enemySpacecrafts;
     private ArrayList<Shot> shots;
+    private ArrayList<Star> stars;
     private ShotFactory shotFactory;
     private int killEnemies;
     private long lastShotTime;
@@ -26,6 +28,7 @@ public class MainSpacecraft extends Spacecraft implements ISubject {
         super(texture, life, speed);
         enemySpacecrafts=new ArrayList<>();
         this.shots = new ArrayList<>();
+        this.stars = new ArrayList<>();
         this.killEnemies = 0;
         this.lastShotTime = 0;
         this.shotSpeed = 0.2;
@@ -40,6 +43,14 @@ public class MainSpacecraft extends Spacecraft implements ISubject {
     public void createEnemySpaceCraft(){
         EnemySpacecraft enemySpacecraft = EnemySpacecraftFactory.create();
         enemySpacecrafts.add(enemySpacecraft);
+    }
+
+    public void createStar(){
+        if(Math.random() < 0.2){
+            Star star = StarFactory.create();
+            stars.add(star);
+        }
+
     }
 
     public ArrayList<EnemySpacecraft> getEnemySpacecrafts() {
@@ -83,6 +94,10 @@ public class MainSpacecraft extends Spacecraft implements ISubject {
             }
 
         }
+    }
+
+    public ArrayList<Star> getStars() {
+        return stars;
     }
 
     public void setShotSpeed(double shotSpeed) {

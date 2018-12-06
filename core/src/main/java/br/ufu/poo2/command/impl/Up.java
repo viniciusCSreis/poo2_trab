@@ -12,7 +12,7 @@ public class Up extends Command {
     @Override
     public void execute() {
         Spacecraft spacecraft=super.getSpacecraft();
-        spacecraft.setY(spacecraft.getY()-10);
+        spacecraft.setY(spacecraft.getY()-spacecraft.getSpeed());
         testY(spacecraft);
     }
 }

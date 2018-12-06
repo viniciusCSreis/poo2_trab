@@ -12,7 +12,7 @@ public class Left extends Command {
     @Override
     public void execute() {
         Spacecraft spacecraft=super.getSpacecraft();
-        spacecraft.setX(spacecraft.getX()-10);
+        spacecraft.setX(spacecraft.getX()-spacecraft.getSpeed());
         testX(spacecraft);
     }
 }

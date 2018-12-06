@@ -5,13 +5,16 @@ import br.ufu.poo2.factory.ControlFactory;
 import br.ufu.poo2.factory.MainSpacecraftFactory;
 import br.ufu.poo2.model.EnemySpacecraft;
 import br.ufu.poo2.model.MainSpacecraft;
+import br.ufu.poo2.model.Star;
 import br.ufu.poo2.model.shot.Shot;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.scenes.scene2d.Stage;
@@ -29,7 +32,7 @@ public class GameScreen implements Screen {
     final Poo2Game game;
     private Stage stage;
     private SpriteBatch spriteBatch;
-    private MainSpacecraft mainSpaceCraft;
+    private MainSpacecraft  mainSpaceCraft;
     private Control control;
     private long lastEnemySpacecraftSpawnTime;
     private ShapeRenderer shapeRenderer;
@@ -37,6 +40,7 @@ public class GameScreen implements Screen {
     OrthographicCamera camera;
     private String username;
     private int spaceCraft;
+    private Sprite background;
 
     public GameScreen(Poo2Game game, int spaceCraft, String username) {
         this.spaceCraft = spaceCraft;
@@ -51,15 +55,16 @@ public class GameScreen implements Screen {
         font=new BitmapFont();
         camera = new OrthographicCamera();
         camera.setToOrtho(false, getWidth(), getHeight());
-
+        Texture backgroundTexture = new Texture("fundo.png");
+        background = new Sprite(backgroundTexture);
 
         Skin skin = new Skin(Gdx.files.internal("skin/neon-ui.json"));
 
         Label usernameLabel = new Label("Nome:", skin, "default");
         Label userNameInput = new Label(username, skin, "default");
-        Label lifeLabel = new Label("Vida:", skin, "default");
-        Label currentLife = new Label(String.valueOf(mainSpaceCraft.getLife()), skin, "default");
-        Label enemiesLabel = new Label("Inimigos:", skin, "default");
+//        Label lifeLabel = new Label("Vida:", skin, "default");
+//        Label currentLife = new Label(String.valueOf(mainSpaceCraft.getLife()), skin, "default");
+//        Label enemiesLabel = new Label("Inimigos:", skin, "default");
 
 
         Table table = new Table(skin);
@@ -67,11 +72,11 @@ public class GameScreen implements Screen {
         table.add(usernameLabel);
         table.add(userNameInput).width(100);
         table.row();
-        table.add(lifeLabel);
-        table.add(currentLife).width(100);
+//        table.add(lifeLabel);
+//        table.add(currentLife).width(100);
         table.row();
-        table.add(enemiesLabel);
-        table.right().top();
+//        table.add(enemiesLabel);
+        table.left().top();
 
         stage.addActor(table);
     }
@@ -90,19 +95,7 @@ public class GameScreen implements Screen {
         camera.update();
 
 
-        shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
-        shapeRenderer.setColor(0,255,0,1);
-        shapeRenderer.rect(
-                getWidth()-mainSpaceCraft.getLife(),
-                getHeight()-100,
-                mainSpaceCraft.getLife(),
-               100
-        );
 
-        stage.act();
-        stage.draw();
-
-        shapeRenderer.end();
 
 
 
@@ -110,15 +103,14 @@ public class GameScreen implements Screen {
 
 
         if(mainSpaceCraft.getLife() <= 0){
-            game.setScreen(new GameScreen(game, this.spaceCraft, this.username));
+            game.setScreen(new MenuScreen(game));
         }
 
 
         mainSpaceCraft.notifyObservers();
         spriteBatch.setProjectionMatrix(camera.combined);
         spriteBatch.begin();
-        font.draw(spriteBatch, String.valueOf(mainSpaceCraft.getLife()), getWidth()-100, getHeight()-50);
-        font.draw(spriteBatch, String.valueOf(mainSpaceCraft.getKillEnemies()), 0, getHeight()-50);
+        spriteBatch.draw(background,background.getX(),background.getY());
         spriteBatch.draw(mainSpaceCraft, mainSpaceCraft.getX(), mainSpaceCraft.getY());
 
         for (Shot shot : mainSpaceCraft.getShots()) {
@@ -128,6 +120,7 @@ public class GameScreen implements Screen {
         if (TimeUtils.nanoTime() - lastEnemySpacecraftSpawnTime > 1000000000)
         {
             mainSpaceCraft.createEnemySpaceCraft();
+            mainSpaceCraft.createStar();
             lastEnemySpacecraftSpawnTime=TimeUtils.nanoTime();
         }
 
@@ -142,7 +135,40 @@ public class GameScreen implements Screen {
             }
         }
 
+        Iterator<Star> starIterator = mainSpaceCraft.getStars().iterator();
+        while (starIterator.hasNext()){
+            Star star = starIterator.next();
+            if(star.update(mainSpaceCraft))
+            {
+                spriteBatch.draw(star,star.getX(),star.getY());
+            }else{
+                starIterator.remove();
+            }
+        }
+
         spriteBatch.end();
+
+        shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
+        shapeRenderer.setColor(0,255,0,1);
+        shapeRenderer.rect(
+                getWidth()-mainSpaceCraft.getLife(),
+                getHeight()-100,
+                mainSpaceCraft.getLife(),
+                100
+        );
+
+        stage.act();
+        stage.draw();
+
+        shapeRenderer.end();
+
+        spriteBatch.begin();
+
+        font.draw(spriteBatch, String.valueOf(mainSpaceCraft.getLife()), getWidth()-100, getHeight()-50);
+        font.draw(spriteBatch, String.valueOf(mainSpaceCraft.getKillEnemies()), 0, getHeight()-50);
+
+        spriteBatch.end();
+
 
 
         if (Gdx.input.isKeyPressed(Input.Keys.A)){
