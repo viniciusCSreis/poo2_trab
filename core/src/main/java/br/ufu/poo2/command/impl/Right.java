@@ -1,7 +1,7 @@
-package command.impl;
+package br.ufu.poo2.command.impl;
 
 import br.ufu.poo2.model.Spacecraft;
-import command.Command;
+import br.ufu.poo2.command.Command;
 
 public class Right extends Command {
 

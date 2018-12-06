@@ -1,4 +1,4 @@
-package command;
+package br.ufu.poo2.command;
 
 import br.ufu.poo2.model.Spacecraft;
 import com.badlogic.gdx.graphics.g2d.Sprite;

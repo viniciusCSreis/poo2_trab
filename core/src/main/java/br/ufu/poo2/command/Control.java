@@ -1,4 +1,4 @@
-package command;
+package br.ufu.poo2.command;
 
 import java.util.ArrayList;
 

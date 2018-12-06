@@ -1,10 +1,9 @@
-package br.ufu.poo2.factory;
+package br.ufu.poo2.factory.factoryMethod.spacecraftFactory;
 
 import br.ufu.poo2.model.EnemySpacecraft;
 import com.badlogic.gdx.graphics.Texture;
-import command.Command;
 
-public class EnemySpacecraftFactory {
+public class EnemySpacecraftFactory extends SpacecraftFactory{
 
     private static EnemySpacecraftFactory EnemySpacecraftFactory = null;
 

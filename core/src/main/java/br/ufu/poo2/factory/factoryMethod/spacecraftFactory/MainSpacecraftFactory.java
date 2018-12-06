@@ -1,10 +1,10 @@
-package br.ufu.poo2.factory;
+package br.ufu.poo2.factory.factoryMethod.spacecraftFactory;
 
 import br.ufu.poo2.model.MainSpacecraft;
 import br.ufu.poo2.model.Spacecraft;
 import com.badlogic.gdx.graphics.Texture;
 
-public class MainSpacecraftFactory {
+public class MainSpacecraftFactory extends SpacecraftFactory{
 
     private static MainSpacecraftFactory mainSpacecraftFactory = null;
 
@@ -19,7 +19,8 @@ public class MainSpacecraftFactory {
         return mainSpacecraftFactory;
     }
 
-    public static MainSpacecraft create(int spaceCraft){
+    @Override
+    public Spacecraft create(int spaceCraft){
         Texture texture = new Texture("1spaceship200px.png");
         MainSpacecraft mainSpacecraft = new MainSpacecraft(texture,100,10);
 

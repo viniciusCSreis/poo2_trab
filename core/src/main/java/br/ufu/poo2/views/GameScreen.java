@@ -2,10 +2,10 @@ package br.ufu.poo2.views;
 
 import br.ufu.poo2.Poo2Game;
 import br.ufu.poo2.factory.ControlFactory;
-import br.ufu.poo2.factory.MainSpacecraftFactory;
+import br.ufu.poo2.factory.factoryMethod.spacecraftFactory.MainSpacecraftFactory;
 import br.ufu.poo2.model.EnemySpacecraft;
 import br.ufu.poo2.model.MainSpacecraft;
-import br.ufu.poo2.model.Shot;
+import br.ufu.poo2.model.shot.Shot;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
@@ -20,9 +20,8 @@ import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.utils.TimeUtils;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
-import command.Control;
+import br.ufu.poo2.command.Control;
 
-import java.awt.*;
 import java.util.Iterator;
 
 public class GameScreen implements Screen {

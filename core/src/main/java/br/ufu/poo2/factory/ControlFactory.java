@@ -1,11 +1,11 @@
 package br.ufu.poo2.factory;
 
 import br.ufu.poo2.model.Spacecraft;
-import command.Control;
-import command.impl.Down;
-import command.impl.Left;
-import command.impl.Right;
-import command.impl.Up;
+import br.ufu.poo2.command.Control;
+import br.ufu.poo2.command.impl.Down;
+import br.ufu.poo2.command.impl.Left;
+import br.ufu.poo2.command.impl.Right;
+import br.ufu.poo2.command.impl.Up;
 
 public class ControlFactory {
     private static ControlFactory controlFactory = null;

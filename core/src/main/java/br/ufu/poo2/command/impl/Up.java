@@ -1,19 +1,18 @@
-package command.impl;
+package br.ufu.poo2.command.impl;
 
 import br.ufu.poo2.model.Spacecraft;
-import command.Command;
+import br.ufu.poo2.command.Command;
 
-public class Down extends Command {
+public class Up extends Command {
 
-
-    public Down(Spacecraft sprite) {
+    public Up(Spacecraft sprite) {
         super(sprite);
     }
 
     @Override
     public void execute() {
         Spacecraft spacecraft=super.getSpacecraft();
-        spacecraft.setY(spacecraft.getY()+spacecraft.getSpeed());
+        spacecraft.setY(spacecraft.getY()-10);
         testY(spacecraft);
     }
 }
