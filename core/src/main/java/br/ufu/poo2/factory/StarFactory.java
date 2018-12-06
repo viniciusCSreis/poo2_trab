@@ -27,8 +27,9 @@ public class StarFactory {
 
         double x = Math.random() * GameScreen.getWidth();
         double y = Math.random() * GameScreen.getHeight();
+        int type = (int)(Math.random() * 3) % 3 ;
         Texture texture = new Texture("star50px.png");
-        Star star = new Star(texture,0);
+        Star star = new Star(texture,type);
         star.setX((float) x);
         star.setY((float) y);
         return star;

@@ -7,10 +7,12 @@ import com.badlogic.gdx.graphics.Texture;
 public class EnemySpacecraft extends Spacecraft implements IObserver {
 
     private int damage;
+    private int type;
 
-    public EnemySpacecraft(Texture texture, int life, int speed, int damage) {
+    public EnemySpacecraft(Texture texture, int life, int speed, int damage,int type) {
         super(texture, life, speed);
         this.damage = damage;
+        this.type=type;
     }
 
     @Override
@@ -19,7 +21,9 @@ public class EnemySpacecraft extends Spacecraft implements IObserver {
         this.setY(this.getY()-this.getSpeed());
         if( this.getY() <= 0 ||  this.getBoundingRectangle().overlaps( mainSpacecraft.getBoundingRectangle() ) )
         {
-            mainSpacecraft.setLife(mainSpacecraft.getLife()-damage);
+            if(this.getY() <= 0 || mainSpacecraft.getShield() == null || !mainSpacecraft.getShield().block(type)){
+                mainSpacecraft.setLife(mainSpacecraft.getLife()-damage);
+            }
             return false;
         }
 

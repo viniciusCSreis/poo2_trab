@@ -94,14 +94,6 @@ public class GameScreen implements Screen {
 
         camera.update();
 
-
-
-
-
-
-
-
-
         if(mainSpaceCraft.getLife() <= 0){
             game.setScreen(new MenuScreen(game));
         }
@@ -156,6 +148,26 @@ public class GameScreen implements Screen {
                 mainSpaceCraft.getLife(),
                 100
         );
+
+        mainSpaceCraft.calcTime();
+        if(mainSpaceCraft.getShield() != null && mainSpaceCraft.getShield().block(1)){
+            shapeRenderer.setColor(255,0,0,1);
+            shapeRenderer.rect(
+                    0,
+                    getHeight()-200,
+                    50,
+                    50
+            );
+        }
+        if(mainSpaceCraft.getShield() != null && mainSpaceCraft.getShield().block(2)){
+            shapeRenderer.setColor(216,123,0,1);
+            shapeRenderer.rect(
+                    0,
+                    getHeight()-250,
+                    50,
+                    50
+            );
+        }
 
         stage.act();
         stage.draw();

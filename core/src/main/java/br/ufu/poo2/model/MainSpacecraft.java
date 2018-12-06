@@ -1,5 +1,6 @@
 package br.ufu.poo2.model;
 
+import br.ufu.poo2.chainofResponsibility.Shield;
 import br.ufu.poo2.factory.EnemySpacecraftFactory;
 import br.ufu.poo2.factory.StarFactory;
 import br.ufu.poo2.factory.factoryMethod.shotFactory.ShotFactory;
@@ -19,10 +20,13 @@ public class MainSpacecraft extends Spacecraft implements ISubject {
     private ArrayList<EnemySpacecraft> enemySpacecrafts;
     private ArrayList<Shot> shots;
     private ArrayList<Star> stars;
+    private Shield shield;
     private ShotFactory shotFactory;
     private int killEnemies;
     private long lastShotTime;
     private double shotSpeed;
+    private long timeShild;
+    private int segsShild;
 
     public MainSpacecraft(Texture texture, int life, int speed) {
         super(texture, life, speed);
@@ -32,6 +36,8 @@ public class MainSpacecraft extends Spacecraft implements ISubject {
         this.killEnemies = 0;
         this.lastShotTime = 0;
         this.shotSpeed = 0.2;
+        this.timeShild=0;
+        this.segsShild=0;
         shotFactory= ShotSimpleFactory.getInstance();
 
     }
@@ -51,6 +57,21 @@ public class MainSpacecraft extends Spacecraft implements ISubject {
             stars.add(star);
         }
 
+    }
+
+    public Shield getShield() {
+        if(segsShild>10)
+        {
+            shield=null;
+            segsShild=0;
+            timeShild=0;
+
+        }
+        return shield;
+    }
+
+    public void setShield(Shield shield) {
+        this.shield = shield;
     }
 
     public ArrayList<EnemySpacecraft> getEnemySpacecrafts() {
@@ -82,6 +103,14 @@ public class MainSpacecraft extends Spacecraft implements ISubject {
 
     public int getKillEnemies() {
         return killEnemies;
+    }
+
+    public void calcTime(){
+        if(TimeUtils.nanoTime() - timeShild > 1000000000)
+        {
+            timeShild =  TimeUtils.nanoTime();
+            segsShild++;
+        }
     }
 
     @Override
