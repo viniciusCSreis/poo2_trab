@@ -143,8 +143,8 @@ public class GameScreen implements Screen {
         shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
         shapeRenderer.setColor(0,255,0,1);
         shapeRenderer.rect(
-                getWidth()-mainSpaceCraft.getLife(),
-                getHeight()-100,
+                0,
+                getHeight()-85,
                 mainSpaceCraft.getLife(),
                 100
         );
@@ -176,8 +176,8 @@ public class GameScreen implements Screen {
 
         spriteBatch.begin();
 
-        font.draw(spriteBatch, String.valueOf(mainSpaceCraft.getLife()), getWidth()-100, getHeight()-50);
-        font.draw(spriteBatch, String.valueOf(mainSpaceCraft.getKillEnemies()), 0, getHeight()-50);
+        font.draw(spriteBatch, String.valueOf("Vida:"+mainSpaceCraft.getLife()), 0, getHeight()-75);
+        font.draw(spriteBatch, String.valueOf("Inimigos Mortos:"+mainSpaceCraft.getKillEnemies()), 0, getHeight()-50);
 
         spriteBatch.end();
 
