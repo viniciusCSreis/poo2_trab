@@ -10,6 +10,7 @@ import br.ufu.poo2.model.shot.Shot;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
@@ -41,6 +42,7 @@ public class GameScreen implements Screen {
     private String username;
     private int spaceCraft;
     private Sprite background;
+    private Music music;
 
     public GameScreen(Poo2Game game, int spaceCraft, String username) {
         this.spaceCraft = spaceCraft;
@@ -79,6 +81,11 @@ public class GameScreen implements Screen {
         table.left().top();
 
         stage.addActor(table);
+
+        music = Gdx.audio.newMusic(Gdx.files.internal("musicafundo.mp3"));
+        music.setVolume(0.1f);
+        music.setLooping(true);
+        music.play();
     }
 
 

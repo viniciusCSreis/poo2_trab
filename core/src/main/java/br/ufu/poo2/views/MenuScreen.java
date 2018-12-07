@@ -22,7 +22,7 @@ public class MenuScreen implements Screen {
         game = poo2;
         stage = new Stage(new ScreenViewport());
         Skin skin = new Skin(Gdx.files.internal("skin/neon-ui.json"));
-        Label title = new Label("OOSPACE2",skin, "default");
+        Label title = new Label("",skin, "default");
         title.setAlignment(Align.center);
         title.setY(Gdx.graphics.getHeight()*2/3);
         title.setWidth(Gdx.graphics.getWidth());
